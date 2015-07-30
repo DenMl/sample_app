@@ -11,7 +11,10 @@ class User < ActiveRecord::Base
 
   has_many :microposts, dependent: :destroy
 
-  private
+  def feed
+    # Это предварительное решение. См. полную реализацию в "Following users".
+    Micropost.where("user_id = ?", id)
+  end
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
